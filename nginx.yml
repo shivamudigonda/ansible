@@ -1,0 +1,16 @@
+---
+- name: nginx
+  hosts: dev
+  become: true
+  become_user: root
+  connection: ssh
+  gather_facts: yes
+
+  tasks:   
+   - name: install nginx
+     command: amazon-linux-extras install nginx1 -y
+
+   - name: service
+     service:
+       name: nginx
+       state: started

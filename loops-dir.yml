@@ -1,0 +1,18 @@
+---
+- name: for directory
+  hosts: dev[0]
+  become: yes
+  user:  ansadmin
+  become_user: root
+  connection: ssh
+
+  tasks: 
+    - name: create directory
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0775
+
+      with_items: 
+        - '/data/test2'
+        - '/data/test3'

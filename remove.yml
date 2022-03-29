@@ -1,0 +1,16 @@
+---
+- hosts: dev[0]
+  user: ansadmin
+  become: yes
+  become_user: root
+  connection: ssh
+
+  vars:
+    pkgname: httpd
+
+  tasks: 
+     - name: remove httpd 
+       yum: 
+         name: '{{pkgname}}' 
+         state: absent
+    

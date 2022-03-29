@@ -1,0 +1,21 @@
+---
+- hosts: dev[0]
+  user: ansadmin
+  become: yes
+  become_user: root
+  connection: ssh
+
+  vars:
+    pkgname: httpd
+
+  tasks: 
+     - name: install httpd 
+       yum: 
+         name: '{{pkgname}}' 
+         state: present
+
+     - name: service
+       service:
+         name: '{{pkgname}}'
+         state: started
+    

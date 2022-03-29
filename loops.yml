@@ -1,0 +1,23 @@
+---
+- name: for directory
+  hosts: dev[0]
+  become: yes
+  user:  ansadmin
+  become_user: root
+  connection: ssh
+
+  tasks: 
+    - name: install 
+      yum:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+
+      with_items: 
+        - httpd
+        - git
+        - mysql
+    - name: start service
+      service:
+        name: httpd
+        state: started

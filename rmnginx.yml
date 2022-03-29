@@ -1,0 +1,13 @@
+---
+- name: nginx
+  hosts: dev
+  become: true
+  become_user: root
+  connection: ssh
+  gather_facts: yes
+
+  tasks:
+   - name: remove installed nginx
+     yum:
+       name: nginx
+       state: absent

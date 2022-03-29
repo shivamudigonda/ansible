@@ -1,0 +1,19 @@
+---
+- name: for directory
+  hosts: dev[0]
+  become: yes
+  user:  ansadmin
+  become_user: root
+  connection: ssh
+
+  tasks: 
+    - name: remove installed httpd git mysql
+      yum:
+        name: "{{ item }}"
+        state: absent
+        update_cache: yes
+
+      with_items: 
+        - httpd
+        - git
+        - mysql
